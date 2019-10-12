@@ -1,5 +1,11 @@
 # Kagla
 
+## REPL
+
+```
+$ sbt run
+```
+
 ## Evaluate source file
 
 ```
