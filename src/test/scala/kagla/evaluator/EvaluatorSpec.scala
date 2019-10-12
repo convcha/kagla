@@ -236,6 +236,13 @@ class EvaluatorSpec extends FlatSpec with Matchers {
       ("let add = fn(x, y) { x + y; }; add(5, 5);", 10),
       ("let add = fn(x, y) { x + y; }; add(5 + 5, add(5, 5));", 20),
       ("fn(x) { x; }(5)", 5),
+      ("let val = 999; fn() { val }()", 999),
+      (
+        """
+          |let newAdder = fn(x) { fn(y) { x + y } }
+          |let addTwo = newAdder(2)
+          |addTwo(3)
+          |""".stripMargin, 5),
     )
 
     tests.foreach {

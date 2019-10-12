@@ -4,7 +4,11 @@ import kagla.`object`.KObject.KObject
 
 object Environment {
   def newEnvironment: Environment                             = Environment(Map())
-  def newEnclosedEnvironment(outer: Environment): Environment = Environment(Map())
+  def newEnclosedEnvironment(outer: Environment): Environment = {
+    val env = newEnvironment
+    env.outer = outer
+    env
+  }
 }
 
 case class Environment(var store: Map[String, KObject]) {
