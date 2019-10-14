@@ -267,9 +267,20 @@ object Evaluator {
 
   def applyFunction(fn: KObject, args: List[KObject]): KObject = fn match {
     case function: KFunction => {
-      val extendedEnv = extendFunctionEnv(function, args)
-      val evaluated   = eval(function.body, extendedEnv)
-      unwrapReturnValue(evaluated)
+      if (function.parameters.nonEmpty && args.length < function.parameters.get.length) {
+        val param = function.parameters.get
+        val extendedEnv = newEnclosedEnvironment(function.env)
+        args.zipWithIndex.foreach {
+          case (arg, idx) => extendedEnv.set(param(idx).value, arg)
+        }
+        val restParam = function.parameters.get.drop(args.length)
+        val curried = function.copy(parameters = Some(restParam), env = extendedEnv)
+        curried
+      } else {
+        val extendedEnv = extendFunctionEnv(function, args)
+        val evaluated   = eval(function.body, extendedEnv)
+        unwrapReturnValue(evaluated)
+      }
     }
     case builtin: KBuiltin => builtin.fn(args: _*)
     case _                 => KError(f"not a function: ${fn.vtype}")

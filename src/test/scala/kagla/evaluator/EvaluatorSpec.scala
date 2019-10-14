@@ -243,6 +243,12 @@ class EvaluatorSpec extends FlatSpec with Matchers {
           |let addTwo = newAdder(2)
           |addTwo(3)
           |""".stripMargin, 5),
+      (
+        """
+          |let sum = fn(x, y) { x + y }
+          |let addOne = sum(1)
+          |addOne(2)
+          |""".stripMargin, 3),
     )
 
     tests.foreach {
