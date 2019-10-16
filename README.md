@@ -3,26 +3,26 @@
 ## REPL
 
 ```
-$ sbt run
+$ sbt core/run
 ```
 
 ## Evaluate source file
 
 ```
-$ sbt "run hello.kagla"
+$ sbt "core/run hello.kagla"
 ```
 
 or
 
 ```
 $ sbt
-sbt:kagla> run hello.kagla
+sbt:kagla> core/run hello.kagla
 ```
 
 ## Development
 
 ```
-$ sbt ~test
+$ sbt ~core/test
 ```
 
 ### Commit Message Guidelines
