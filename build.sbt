@@ -6,6 +6,7 @@ ThisBuild / organization     := "kagla"
 ThisBuild / organizationName := "kagla"
 
 lazy val root = (project in file("."))
+  .dependsOn(core)
   .settings(
     name := "kagla",
   )
@@ -15,3 +16,9 @@ lazy val core = project
     name := "core",
     libraryDependencies += scalaTest % Test
   )
+
+lazy val genASTGraph = taskKey[Unit]("Generate AST graph.")
+lazy val task = project
+    .settings(
+    )
+  .dependsOn(core)
