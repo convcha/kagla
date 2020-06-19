@@ -1,5 +1,12 @@
 # Kagla
 
+## Example
+
+```
+let name = "Kagla"
+puts("Hello, " + name + "!")
+```
+
 ## REPL
 
 ```
